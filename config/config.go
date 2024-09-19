@@ -7,6 +7,9 @@ type AppConfig struct {
 	HTTP       struct {
 		Port string
 	}
+	MySQL struct {
+		ConnectionString string
+	}
 }
 
 var appConfig *AppConfig
