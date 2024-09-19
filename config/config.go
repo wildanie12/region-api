@@ -33,5 +33,6 @@ func Get(version ...string) *AppConfig {
 func initConfig() *AppConfig {
 	ac := AppConfig{}
 	ac.HTTP.Port = os.Getenv("HTTP_PORT")
+	ac.MySQL.ConnectionString = os.Getenv("MYSQL_HOST")
 	return &ac
 }
