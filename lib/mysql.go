@@ -27,5 +27,5 @@ func (di *DatabaseInstance) ConnectMySQL() {
 	if err != nil {
 		panic(err)
 	}
-	di.mysql = db
+	di.MySQL = db
 }
