@@ -15,7 +15,7 @@ type RegionInterface interface {
 	// ListRegency return list of data province.
 	ListRegency(ctx context.Context, filters []entity.ListFilter, sorts []entity.ListSort, preloads entity.Preload) ([]entity.Regency, error)
 	// ListDistrict return list of data province.
-	ListDistrict(ctx context.Context, filters []entity.ListFilter, sorts []entity.ListSort, preloads entity.Preload) ([]entity.Regency, error)
+	ListDistrict(ctx context.Context, filters []entity.ListFilter, sorts []entity.ListSort, preloads entity.Preload) ([]entity.District, error)
 	// ListVillage return list of data province.
 	ListVillage(ctx context.Context, filters []entity.ListFilter, sorts []entity.ListSort, preloads entity.Preload) ([]entity.Village, error)
 }
@@ -85,9 +85,9 @@ func (r *regionRepository) ListRegency(ctx context.Context, filters []entity.Lis
 }
 
 // ListDistrict return list of data province.
-func (r *regionRepository) ListDistrict(ctx context.Context, filters []entity.ListFilter, sorts []entity.ListSort, preloads entity.Preload) ([]entity.Regency, error) {
-	data := []entity.Regency{}
-	tx := r.db.Model(entity.Regency{})
+func (r *regionRepository) ListDistrict(ctx context.Context, filters []entity.ListFilter, sorts []entity.ListSort, preloads entity.Preload) ([]entity.District, error) {
+	data := []entity.District{}
+	tx := r.db.Model(entity.District{})
 
 	// apply filter
 	for _, filter := range filters {

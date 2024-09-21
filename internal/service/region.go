@@ -50,6 +50,21 @@ func (s *RegionService) ListRegency(ctx context.Context, provinceID uint) ([]ent
 	return data, nil
 }
 
+// ListDistrict return list of districts.
+func (s *RegionService) ListDistrict(ctx context.Context, regencyID uint) ([]entity.District, error) {
+	// get list of districts ordered by name
+	data, err := s.regionRepository.ListDistrict(
+		ctx,
+		[]entity.ListFilter{{Column: "regency_id", Operator: "=", Value: regencyID}},
+		[]entity.ListSort{{Column: "district_name", Order: entity.SortAsc}},
+		entity.Preload{},
+	)
+	if err != nil {
+		return data, s.makeError(err)
+	}
+	return data, nil
+}
+
 func (s *RegionService) makeError(err error) error {
 	return fmt.Errorf("(x) region service err: %v", err)
 }

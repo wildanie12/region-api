@@ -77,3 +77,33 @@ func (h *RegionHandler) Regencies(c echo.Context) error {
 		Data:       res,
 	})
 }
+
+// Districts handles `GET` `/districts` endpoint.
+func (h *RegionHandler) Districts(c echo.Context) error {
+	// validate parameter
+	regencyID, err := strconv.Atoi(c.QueryParam("regency_id"))
+	if err != nil {
+		return responseBadRequest(c, "regency_id parameter must be a valid regency id number")
+	}
+
+	// get list of districts
+	data, err := h.regionService.ListDistrict(context.Background(), uint(regencyID))
+	if err != nil {
+		return responseInternalError(c, err)
+	}
+
+	// mapping data
+	res := []web.District{}
+	err = copier.Copy(&res, data)
+	if err != nil {
+		return responseInternalError(c, err)
+	}
+
+	return c.JSON(http.StatusOK, web.CommonResponse{
+		ApiVersion: config.Get().AppVersion,
+		Status:     "success",
+		IsSuccess:  true,
+		Message:    "success getting list of districts",
+		Data:       res,
+	})
+}
