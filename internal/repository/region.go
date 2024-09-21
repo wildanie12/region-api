@@ -39,7 +39,7 @@ func (r *regionRepository) ListProvince(ctx context.Context, filters []entity.Li
 
 	// apply filter
 	for _, filter := range filters {
-		tx = tx.Where(fmt.Sprintf("%s %s", filter.Column, filter.Operator), filter.Value)
+		tx = tx.Where(fmt.Sprintf("%s %s ?", filter.Column, filter.Operator), filter.Value)
 	}
 	// apply sort
 	for _, sort := range sorts {
@@ -65,7 +65,7 @@ func (r *regionRepository) ListRegency(ctx context.Context, filters []entity.Lis
 
 	// apply filter
 	for _, filter := range filters {
-		tx = tx.Where(fmt.Sprintf("%s %s", filter.Column, filter.Operator), filter.Value)
+		tx = tx.Where(fmt.Sprintf("%s %s ?", filter.Column, filter.Operator), filter.Value)
 	}
 	// apply sort
 	for _, sort := range sorts {
@@ -91,7 +91,7 @@ func (r *regionRepository) ListDistrict(ctx context.Context, filters []entity.Li
 
 	// apply filter
 	for _, filter := range filters {
-		tx = tx.Where(fmt.Sprintf("%s %s", filter.Column, filter.Operator), filter.Value)
+		tx = tx.Where(fmt.Sprintf("%s %s ?", filter.Column, filter.Operator), filter.Value)
 	}
 	// apply sort
 	for _, sort := range sorts {
@@ -117,7 +117,7 @@ func (r *regionRepository) ListVillage(ctx context.Context, filters []entity.Lis
 
 	// apply filter
 	for _, filter := range filters {
-		tx = tx.Where(fmt.Sprintf("%s %s", filter.Column, filter.Operator), filter.Value)
+		tx = tx.Where(fmt.Sprintf("%s %s ?", filter.Column, filter.Operator), filter.Value)
 	}
 	// apply sort
 	for _, sort := range sorts {
