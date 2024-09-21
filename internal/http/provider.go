@@ -13,4 +13,5 @@ func (ah *AppHTTP) Provide(
 
 	// region
 	ah.e.GET("/provinces", rh.Provinces)
+	ah.e.GET("/regencies", rh.Regencies)
 }

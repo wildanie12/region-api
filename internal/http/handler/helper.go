@@ -17,3 +17,13 @@ func responseInternalError(c echo.Context, err error) error {
 		Message:    "internal server error: " + err.Error(),
 	})
 }
+
+// responseBadRequest can help handler to return response shape for any internal error.
+func responseBadRequest(c echo.Context, errMsg string) error {
+	return c.JSON(http.StatusBadRequest, web.CommonResponse{
+		ApiVersion: config.Get().AppVersion,
+		Status:     "error",
+		IsSuccess:  false,
+		Message:    errMsg,
+	})
+}
