@@ -15,4 +15,5 @@ func (ah *AppHTTP) Provide(
 	ah.e.GET("/provinces", rh.Provinces)
 	ah.e.GET("/regencies", rh.Regencies)
 	ah.e.GET("/districts", rh.Districts)
+	ah.e.GET("/villages", rh.Villages)
 }

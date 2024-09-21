@@ -107,3 +107,33 @@ func (h *RegionHandler) Districts(c echo.Context) error {
 		Data:       res,
 	})
 }
+
+// Villages handles `GET` `/villages` endpoint.
+func (h *RegionHandler) Villages(c echo.Context) error {
+	// validate parameter
+	districtID, err := strconv.Atoi(c.QueryParam("district_id"))
+	if err != nil {
+		return responseBadRequest(c, "district_id parameter must be a valid village id number")
+	}
+
+	// get list of villages
+	data, err := h.regionService.ListVillage(context.Background(), uint(districtID))
+	if err != nil {
+		return responseInternalError(c, err)
+	}
+
+	// mapping data
+	res := []web.Village{}
+	err = copier.Copy(&res, data)
+	if err != nil {
+		return responseInternalError(c, err)
+	}
+
+	return c.JSON(http.StatusOK, web.CommonResponse{
+		ApiVersion: config.Get().AppVersion,
+		Status:     "success",
+		IsSuccess:  true,
+		Message:    "success getting list of villages",
+		Data:       res,
+	})
+}

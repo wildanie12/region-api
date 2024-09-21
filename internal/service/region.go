@@ -65,6 +65,21 @@ func (s *RegionService) ListDistrict(ctx context.Context, regencyID uint) ([]ent
 	return data, nil
 }
 
+// ListVillage return list of villages.
+func (s *RegionService) ListVillage(ctx context.Context, districtID uint) ([]entity.Village, error) {
+	// get list of villages ordered by name
+	data, err := s.regionRepository.ListVillage(
+		ctx,
+		[]entity.ListFilter{{Column: "district_id", Operator: "=", Value: districtID}},
+		[]entity.ListSort{{Column: "village_name", Order: entity.SortAsc}},
+		entity.Preload{},
+	)
+	if err != nil {
+		return data, s.makeError(err)
+	}
+	return data, nil
+}
+
 func (s *RegionService) makeError(err error) error {
 	return fmt.Errorf("(x) region service err: %v", err)
 }
