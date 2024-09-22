@@ -20,6 +20,7 @@ type Regency struct {
 	Latitude    float64 `gorm:"type:float;not null"`
 
 	Districts *[]District `gorm:"foreignKey:RegencyID;references:ID"`
+	Province  *Province   `gorm:"foreignKey:ProvinceID;references:ID"`
 }
 
 // District mysql region entity.
@@ -31,6 +32,7 @@ type District struct {
 	Latitude     float64 `gorm:"type:float;not null"`
 
 	Villages *[]Village `gorm:"foreignKey:DistrictID;references:ID"`
+	Regency  *Village   `gorm:"foreignKey:RegencyID;references:ID"`
 }
 
 // Village mysql region entity.
@@ -40,4 +42,6 @@ type Village struct {
 	DistrictID  uint    `gorm:"not null"`
 	Longitude   float64 `gorm:"type:float;not null"`
 	Latitude    float64 `gorm:"type:float;not null"`
+
+	District *District `gorm:"foreignKey:DistrictID;references:ID"`
 }
