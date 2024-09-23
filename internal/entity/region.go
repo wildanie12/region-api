@@ -32,7 +32,7 @@ type District struct {
 	Latitude     float64 `gorm:"type:float;not null"`
 
 	Villages *[]Village `gorm:"foreignKey:DistrictID;references:ID"`
-	Regency  *Village   `gorm:"foreignKey:RegencyID;references:ID"`
+	Regency  *Regency   `gorm:"foreignKey:RegencyID;references:ID"`
 }
 
 // Village mysql region entity.
