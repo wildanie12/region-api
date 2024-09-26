@@ -80,6 +80,16 @@ func (s *RegionService) ListVillage(ctx context.Context, districtID uint) ([]ent
 	return data, nil
 }
 
+// SearchRegion searches in all hierarchy of regions returns preloaded villages.
+func (s *RegionService) SearchRegion(ctx context.Context, keyword string, limit int) ([]entity.Village, error) {
+	// get list of villages ordered by name
+	data, err := s.regionRepository.JoinedSearch(ctx, keyword, limit)
+	if err != nil {
+		return data, s.makeError(err)
+	}
+	return data, nil
+}
+
 func (s *RegionService) makeError(err error) error {
 	return fmt.Errorf("(x) region service err: %v", err)
 }
